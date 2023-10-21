@@ -38,10 +38,9 @@ push_script: |
   sf --version
   export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
   export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-  export SF_LOG_LEVEL=fatal
   echo y | sf plugins install sfdx-browserforce-plugin
   sf browserforce:apply -f config/change-default-currency-locale.json
-  sf project deploy start --wait 60 --ignore-conflicts 1>/dev/null
+  sf project deploy start --wait 60 --ignore-conflicts
 
 ```
 
