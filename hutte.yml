@@ -3,9 +3,9 @@ version: 1.0
 # Shell script to run when pushing the source code to the scratch orgs.
 # It's a great place to automate tasks like permission set assignments or data loading.
 push_script: |
-  sfdx --version
+  sf --version
   export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-  echo y | sfdx plugins install sfdx-browserforce-plugin
   export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-  sfdx browserforce:apply -f config/change-default-currency-locale.json
-  sfdx force:source:push -f --loglevel fatal 1>/dev/null
+  echo y | sf plugins install sfdx-browserforce-plugin
+  sf browserforce:apply -f config/change-default-currency-locale.json
+  sf project deploy start --wait 60 --ignore-conflicts

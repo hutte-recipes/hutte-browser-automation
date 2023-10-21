@@ -35,12 +35,13 @@ Create a `config/change-default-currency-locale.json` file with the following co
 
 ```yaml
 push_script: |
-  sfdx --version
+  sf --version
   export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-  echo y | sfdx plugins install sfdx-browserforce-plugin
   export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-  sfdx browserforce:apply -f config/change-default-currency-locale.json
-  sfdx force:source:push -f --loglevel fatal 1>/dev/null
+  echo y | sf plugins install sfdx-browserforce-plugin
+  sf browserforce:apply -f config/change-default-currency-locale.json
+  sf project deploy start --wait 60 --ignore-conflicts
+
 ```
 
 ### Step 3
