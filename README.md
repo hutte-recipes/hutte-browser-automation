@@ -6,14 +6,12 @@ In this example, we set the Currency Locale to `English (Ireland) - EUR`.
 
 ## Prerequisites
 
-- a valid Sfdx Project
+- a valid sfdx project
 - a `hutte.yml` file (e.g. the default one shown in the `CONFIGURATION` tab)
-
-## Steps
 
 The following assumes that we use the `config` directory to store a configuration file for `sfdx-browserforce-plugin`.
 
-### Step 1
+## Step 1: Create currency locale file
 
 Create a `config/change-default-currency-locale.json` file with the following content:
 
@@ -28,7 +26,7 @@ Create a `config/change-default-currency-locale.json` file with the following co
 }
 ```
 
-### Step 2
+## Step 2: Modify push script
 
 - Edit the `hutte.yml` file in your default branch
 - Add the following lines to the `push_script`
@@ -37,14 +35,13 @@ Create a `config/change-default-currency-locale.json` file with the following co
 push_script: |
   sf --version
   export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-  export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
   echo y | sf plugins install sfdx-browserforce-plugin
+  export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
   sf browserforce:apply -f config/change-default-currency-locale.json
   sf project deploy start --wait 60 --ignore-conflicts
-
 ```
 
-### Step 3
+### Step 3: Validate
 
 - Create a Scratch Org
 - Log in to the Scratch Org
