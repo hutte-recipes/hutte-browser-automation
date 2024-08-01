@@ -33,12 +33,12 @@ Create a `config/change-default-currency-locale.json` file with the following co
 
 ```yaml
 push_script: |
-  sf --version
+  set -euo pipefail # fail fast
   # install dependencies for Chrome: https://github.com/jontewks/puppeteer-heroku-buildpack/blob/bf058b1bb420204357124941c58d80f8250cc463/bin/compile#L60-L85
   apt-get -qq -y install gconf-service libappindicator1 libasound2 libatk1.0-0 libatk-bridge2.0-0 libcairo-gobject2 libdrm2 libgbm1 libgconf-2-4 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxcb-dri3-0 libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxi6 libxinerama1 libxrandr2 libxshmfence1 libxss1 libxtst6 fonts-liberation > /dev/null
   echo y | sf plugins install sfdx-browserforce-plugin
-  sf browserforce:apply -f config/change-default-currency-locale.json
-  sf project deploy start --wait 60 --ignore-conflicts
+  sf browserforce apply -f config/change-default-currency-locale.json
+  sf project deploy start
 ```
 
 ### Step 3: Validate
