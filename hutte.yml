@@ -5,6 +5,6 @@ version: "1.0"
 push_script: |
   set -euo pipefail # fail fast
   echo y | sf plugins install sfdx-browserforce-plugin
-  sf browserforce playwright -- install chromium
+  sf browserforce playwright -- install --with-deps chromium
   sf browserforce apply -f config/change-default-currency-locale.json
   sf project deploy start
